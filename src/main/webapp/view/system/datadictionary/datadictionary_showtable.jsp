@@ -27,8 +27,6 @@
     	<input type="text"  class="form-control input-sm"/>
     </div>
     <a  class="btn btn-danger"  href="${pageContext.request.contextPath}/system/datadictionary/list.action"   >查询</a>
-    <a  class="btn btn-success"  href="datadictionary_add.html"   >添加</a>
- 
      <a href="${pageContext.request.contextPath }/downdown/down.action" class="btn btn-success">下载SQL语句</a>
      <a href="${pageContext.request.contextPath }/downdown/down1.action" class="btn btn-success">下载表结构关系图</a>
      <a href="${pageContext.request.contextPath }/downdown/down2.action" class="btn btn-success">下载PDM文件</a>

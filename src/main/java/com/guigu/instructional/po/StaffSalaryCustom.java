@@ -11,6 +11,10 @@ public class StaffSalaryCustom extends StaffSalary{
 	public void setStaffName(String staffName) {
 		this.staffName = staffName;
 	}
+	@Override
+	public String toString() {
+		return "StaffSalaryCustom [staffName=" + staffName + ", staStaffName=" + staStaffName + "]";
+	}
 	public String getStaStaffName() {
 		return staStaffName;
 	}

@@ -70,6 +70,8 @@ public class StaffSalaryServiceImpl implements StaffSalaryService {
 				criteria.andStaStaffIdEqualTo(staffSalary.getStaStaffId());
 			}
 
+		}else {
+			return staffSalaryMapper.selectByExample(null);
 		}
 
 		return staffSalaryMapper.selectByExample(staffSalaryExample);

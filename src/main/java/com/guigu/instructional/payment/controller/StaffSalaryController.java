@@ -3,6 +3,8 @@ package com.guigu.instructional.payment.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,29 @@ public class StaffSalaryController {
 	@Resource(name="staffInfoServiceImpl")
 	private StaffInfoService staffInfoService;
 	
+//	@RequestMapping("list.action")
+//    public String list(StaffSalaryCustom staffSalaryCustom,Model model) throws Exception {
+//        List<StaffSalaryCustom> list =staffSalaryService.findStaffSalaryList(staffSalaryCustom);
+//        model.addAttribute("list", list);
+//        
+//        return "payment/staffsalary/staffsalary_list";
+//    }
 	
+	
+	@RequestMapping("excel.action")
+	public void export(HttpServletResponse response) throws Exception {
+		//需要导入alibaba的fastjson包
+		StaffSalary staffSalary=new StaffSalary();
+		List<StaffSalary> list =staffSalaryService.getStaffSalary(staffSalary);
+		
+		
+		
+		ExportExcel<StaffSalary> ee= new ExportExcel<StaffSalary>();
+		String[] headers = { "工资单号", "领取人员工号", "财务人员工号", "本月工资" , "扣除工资", "实际发放工资", "是否发放", "发放时间", "备注信息"};
+		String fileName = "员工工资单统计表";
+		ee.exportExcel(headers,list,fileName,response);
+	}
+
 	 @RequestMapping("add.action")
 	    public String addStaffSalary(@Validated StaffSalary staffSalary,BindingResult bindingResult,Model model) throws Exception {
 	       
