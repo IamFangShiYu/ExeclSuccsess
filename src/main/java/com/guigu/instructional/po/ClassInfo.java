@@ -2,19 +2,26 @@ package com.guigu.instructional.po;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ClassInfo {
     private Integer classId;
-
+    
     private Integer disciplineId;
 
     private Integer syllabusId;
 
     private Integer classroomId;
-
+    
     private Integer staffId;
-
+    
+    @Size(min=3,max=9,message="{classInfo.className.length}")
+    @NotEmpty(message="{classInfo.className.isNull}")
     private String className;
 
+    @NotNull(message="{classInfo.classNumber.isNull}")
     private Integer classNumber;
 
     private Date classStartTime;

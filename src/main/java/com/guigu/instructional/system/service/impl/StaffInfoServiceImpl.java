@@ -69,19 +69,45 @@ public class StaffInfoServiceImpl implements StaffInfoService {
             }
             if(staffInfo.getStaffMobilePhone()!=null) {
                 criteria.andStaffMobilePhoneEqualTo(staffInfo.getStaffMobilePhone());
-            } if(staffInfo.getRoleId()!=null) {
+            }if(staffInfo.getRoleId()!=null) {
                 criteria.andRoleIdEqualTo(staffInfo.getRoleId());
-            }
+            } 
             
         }
-        else{
-        	return staffInfoMapper.selectByExample(null);
-        		}
+       
         criteria.andStaffStateEqualTo("1");
        
         
         return staffInfoMapper.selectByExample(staffInfoExample);
     }
+    
+    
+//tianjia
+    @Override
+    public List<StaffInfo> getteacherList(StaffInfo staffInfo) {
+        StaffInfoExample staffInfoExample =new StaffInfoExample();
+        
+        Criteria criteria =staffInfoExample.createCriteria();
+        if(staffInfo!=null) {
+            if(staffInfo.getStaffId()!=null) {
+                criteria.andStaffIdEqualTo(staffInfo.getStaffId());
+            }
+            if(staffInfo.getStaffName()!=null) {
+                staffInfo.setStaffName("%"+staffInfo.getStaffName()+"%");
+                criteria.andStaffNameLike(staffInfo.getStaffName());
+            }
+            if(staffInfo.getStaffMobilePhone()!=null) {
+                criteria.andStaffMobilePhoneEqualTo(staffInfo.getStaffMobilePhone());
+            } 
+            
+        }
+       
+        criteria.andStaffStateEqualTo("1");
+        criteria.andRoleIdEqualTo(3);
+        
+        return staffInfoMapper.selectByExample(staffInfoExample);
+    }
+    
 
     @Override
     public StaffInfo getStaffInfo(Integer staffId) {

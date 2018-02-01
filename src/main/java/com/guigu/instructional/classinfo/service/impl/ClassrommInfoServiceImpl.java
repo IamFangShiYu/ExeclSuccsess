@@ -36,9 +36,6 @@ public class ClassrommInfoServiceImpl implements ClassroomInfoService{
 
 	@Override
 	public boolean updateClassroomInfo(ClassroomInfo classroomInfo) {
-		if (classroomInfo != null) {
-			classroomInfo.setClassroomMark("1");
-		}
 		try {
 			int i = classroomInfoMapper.updateByPrimaryKeySelective(classroomInfo);
 			if (i > 0) {

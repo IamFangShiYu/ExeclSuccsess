@@ -6,6 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.guigu.instructional.classinfo.service.DisciplineInfoService;
@@ -19,7 +22,14 @@ public class DisciplineInfoController {
 	private DisciplineInfoService disciplineInfoService;
 
 	@RequestMapping("add.action")
-	public String adddisciplineInfo(DisciplineInfo disciplineInfo, Model model) {
+	public String adddisciplineInfo(@Validated DisciplineInfo disciplineInfo, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("disciplineInfo", disciplineInfo);
+			return "classinfo/disciplineinfo/disciplineinfo_add";
+		}
 		disciplineInfo.setDisciplineIsused("1");
 		boolean result = disciplineInfoService.addDisciplineInfo(disciplineInfo);
 		if (result) {
@@ -55,7 +65,16 @@ public class DisciplineInfoController {
 
 
 	@RequestMapping("update.action")
-	public String updatedisciplineInfo(DisciplineInfo disciplineInfo, Model model) {
+	public String updatedisciplineInfo(@Validated DisciplineInfo disciplineInfo, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("studentInfo", disciplineInfo);
+			return "classinfo/disciplineinfo/disciplineinfo_update";
+		}
+		
 		boolean result = disciplineInfoService.updateDisciplineInfo(disciplineInfo);
 		if (result) {
 			model.addAttribute("info", "success");

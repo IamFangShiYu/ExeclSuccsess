@@ -1,12 +1,20 @@
 package com.guigu.instructional.po;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class DisciplineInfo {
     private Integer disciplineId;
 
+    @NotEmpty(message="{disciplineInfo.disciplineName.isEmpty}")
+    @Size(min=2,max=9,message= "{disciplineInfo.disciplineName.length}")
     private String disciplineName;
 
+    @NotNull(message="{disciplineInfo.disciplineTuition.isNull}")
     private Integer disciplineTuition;
 
+    @NotNull(message="{disciplineInfo.disciplineBring.isNull}")
     private Integer disciplineBring;
 
     private String disciplineDesc;

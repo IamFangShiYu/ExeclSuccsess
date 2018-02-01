@@ -26,7 +26,7 @@ public class StaffTeacherController {
 	
 	@RequestMapping("teacherlist.action")
 	public String teacherlist(StaffInfo staffInfo, Model model) throws Exception {
-		List<StaffTeachers> list = staffTeacherService.findStaffTeachers(staffInfo);
+		List<StaffInfo> list = staffInfoService.getteacherList(staffInfo);
 		model.addAttribute("list", list);
 		return "classinfo/teacher/teacher_list";
 	}

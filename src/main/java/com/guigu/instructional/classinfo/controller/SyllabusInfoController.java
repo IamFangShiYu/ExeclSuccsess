@@ -6,6 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.guigu.instructional.classinfo.service.SyllabusInfoService;
@@ -19,9 +22,17 @@ public class SyllabusInfoController {
 	private SyllabusInfoService syllabusInfoService;
 	
 	@RequestMapping("add.action")
-	public String addSyllabusInfo(SyllabusInfo SyllabusInfo, Model model) {
-		SyllabusInfo.setSyllabusIsused("1");
-		boolean result = syllabusInfoService.addSyllabusInfo(SyllabusInfo);
+	public String addSyllabusInfo(@Validated SyllabusInfo syllabusInfo, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("syllabusInfo", syllabusInfo);
+			return "classinfo/syllabusinfo/syllabusinfo_add";
+		}
+		
+		syllabusInfo.setSyllabusIsused("1");
+		boolean result = syllabusInfoService.addSyllabusInfo(syllabusInfo);
 		if (result) {
 			model.addAttribute("info", "successful");
 		} else {
@@ -32,8 +43,8 @@ public class SyllabusInfoController {
 	}
 
 	@RequestMapping("list.action")
-	public String list(SyllabusInfo SyllabusInfo, Model model) {
-		List<SyllabusInfo> list = syllabusInfoService.getSyllabusInfoList(SyllabusInfo);
+	public String list(SyllabusInfo syllabusInfo, Model model) {
+		List<SyllabusInfo> list = syllabusInfoService.getSyllabusInfoList(syllabusInfo);
 		model.addAttribute("list", list);
 		return "classinfo/syllabusinfo/syllabusinfo_list";
 	}
@@ -47,7 +58,14 @@ public class SyllabusInfoController {
 	}
 
 	@RequestMapping("update.action")
-	public String updateSyllabusInfo(SyllabusInfo syllabusInfo, Model model) {
+	public String updateSyllabusInfo(@Validated SyllabusInfo syllabusInfo, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("syllabusInfo", syllabusInfo);
+			return "classinfo/syllabusinfo/syllabusinfo_update";
+		}
 		boolean result = syllabusInfoService.updateSyllabusInfo(syllabusInfo);
 		if (result) {
 			model.addAttribute("info", "success");

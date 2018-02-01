@@ -6,6 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.guigu.instructional.classinfo.service.ClassroomInfoService;
@@ -19,7 +22,14 @@ public class ClassroomInfoController {
 	private ClassroomInfoService classroomInfoService;
 
 	@RequestMapping("add.action")
-	public String addClassroomInfo(ClassroomInfo classroomInfo, Model model) {
+	public String addClassroomInfo(@Validated ClassroomInfo classroomInfo,BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("classroomInfo", classroomInfo);
+			return "classinfo/classroominfo/classroominfo_add";
+		}
 		classroomInfo.setClassroomMark("1");
 		boolean result = classroomInfoService.addClassroomInfo(classroomInfo);
 		if (result) {
@@ -46,7 +56,14 @@ public class ClassroomInfoController {
 	}
 
 	@RequestMapping("update.action")
-	public String updateClassroomInfo(ClassroomInfo classroomInfo, Model model) {
+	public String updateClassroomInfo(@Validated ClassroomInfo classroomInfo,BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			model.addAttribute("allErrors", allErrors);
+			
+			model.addAttribute("classroomInfo", classroomInfo);
+			return "classinfo/classroominfo/classroominfo_update";
+		}
 		boolean result = classroomInfoService.updateClassroomInfo(classroomInfo);
 		if (result) {
 			model.addAttribute("info", "success");

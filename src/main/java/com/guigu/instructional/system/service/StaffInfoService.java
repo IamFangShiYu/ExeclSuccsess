@@ -54,6 +54,8 @@ public interface StaffInfoService {
      * @since JDK 1.8
      */
     public StaffInfo getStaffInfo(Integer staffId);
+
+    public List<StaffInfo> getteacherList(StaffInfo staffInfo);
     
     
 }

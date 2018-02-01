@@ -18,6 +18,13 @@
     </ul>
 </div>
 
+<c:if test="${allErrors!=null}">
+	<br/>
+	<c:forEach items="${allErrors }" var="error">
+		${error.defaultMessage }<br/>
+	</c:forEach>
+</c:if>
+
 <form action="${pageContext.request.contextPath}/classinfo/classinfo/add.action" method="post" class="form-horizontal">
 
     <h5 class="page-header alert-info" style="padding:10px; margin:0px; margin-bottom:5px;">基本信息</h5>

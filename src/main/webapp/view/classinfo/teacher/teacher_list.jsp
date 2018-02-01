@@ -25,7 +25,7 @@
 </script>
 
 <div class="row alert alert-info"  style="margin:0px; padding:3px;" >
-<form  action="${pageContext.request.contextPath}/system/staffinfo/teacherlist.action" method="post" class="form-horizontal">
+<form  action="${pageContext.request.contextPath}/system/staffteacher/teacherlist.action" method="post" class="form-horizontal">
 	<div class="col-sm-1" >条件:</div>
     <div class="col-sm-3">
     	<select class="form-control  input-sm" onchange="query(this)" name="condition">
@@ -59,15 +59,15 @@
     </table>
     <display:table class="table table-condensed table-striped" name="list" pagesize="10" requestURI="${pageContext.request.contextPath }/system/staffinfo/teacherlist.action">
     	<display:column property="staffId" title="编号"></display:column>
-    	<display:column property="staffName" title="姓名" href="${pageContext.request.contextPath }/system/staffinfo/show.action" paramId="staffId" paramProperty="staffId"></display:column>
+    	<display:column property="staffName" title="姓名" href="${pageContext.request.contextPath }/system/staffteacher/show.action" paramId="staffId" paramProperty="staffId"></display:column>
     	<display:column property="staffAge" title="年龄"></display:column>
     	
     	<display:column property="staffMobilePhone" title="移动电话"></display:column>
     	<display:column property="staffEmail" title="邮箱"></display:column>
     	<display:column property="staffEntryTime" title="入职时间" format="{0,date,yyyy年MM月dd日}"></display:column>
     	<display:column property="staffEducationLevel" title="教育水平"></display:column>
-    	<display:column href="${pageContext.request.contextPath }/system/staffinfo/teacherload.action" paramId="staffId" paramProperty="staffId" value="修改" title="修改"></display:column>
-    	<display:column href="${pageContext.request.contextPath }/system/staffinfo/delete.action" paramId="staffId" paramProperty="staffId" value="删除" title="删除"></display:column>
+    	<display:column href="${pageContext.request.contextPath }/system/staffteacher/teacherload.action" paramId="staffId" paramProperty="staffId" value="修改" title="修改"></display:column>
+    	<display:column href="${pageContext.request.contextPath }/system/staffteacher/delete.action" paramId="staffId" paramProperty="staffId" value="删除" title="删除"></display:column>
     	
     </display:table>
     

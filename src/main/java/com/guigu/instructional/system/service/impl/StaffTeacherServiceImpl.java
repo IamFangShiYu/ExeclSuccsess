@@ -23,10 +23,32 @@ public class StaffTeacherServiceImpl implements StaffTeacherService {
 	private StaffInfoMapper staffInfoMapper;
 
 	@Override
-	public List<StaffTeachers> findStaffTeachers(StaffInfo staffInfo) throws Exception {
-
-		
-		return staffTeachersMapper.findStaffTeachers(staffInfo);
+	public List<StaffInfo> findStaffTeachers(StaffInfo staffInfo) throws Exception {
+		 StaffInfoExample staffInfoExample =new StaffInfoExample();
+	        
+	        Criteria criteria =staffInfoExample.createCriteria();
+	        if(staffInfo!=null) {
+	            if(staffInfo.getStaffId()!=null) {
+	                criteria.andStaffIdEqualTo(staffInfo.getStaffId());
+	            }
+	            if(staffInfo.getStaffName()!=null) {
+	                staffInfo.setStaffName("%"+staffInfo.getStaffName()+"%");
+	                criteria.andStaffNameLike(staffInfo.getStaffName());
+	            }
+	            if(staffInfo.getStaffMobilePhone()!=null) {
+	                criteria.andStaffMobilePhoneEqualTo(staffInfo.getStaffMobilePhone());
+	            } if(staffInfo.getRoleId()!=null) {
+	                criteria.andRoleIdEqualTo(staffInfo.getRoleId());
+	            }
+	            
+	        }
+	        else{
+	        	return staffInfoMapper.selectByExample(null);
+	        		}
+	        criteria.andStaffStateEqualTo("1");
+	       
+	        
+	        return staffInfoMapper.selectByExample(staffInfoExample);
 	}
 	
 

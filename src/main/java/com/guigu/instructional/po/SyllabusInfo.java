@@ -1,5 +1,8 @@
 package com.guigu.instructional.po;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class SyllabusInfo {
     private Integer syllabusId;
 
@@ -19,6 +22,8 @@ public class SyllabusInfo {
 
     private String syllabusIsused;
 
+    @NotEmpty(message="{syllabusInfo.syllabusName.isEmpty}")
+    @Size(min=2,max=9,message="{syllabusInfo.syllabusName.length}")
     private String syllabusName;
 
     public Integer getSyllabusId() {

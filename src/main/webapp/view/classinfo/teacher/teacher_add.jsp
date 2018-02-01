@@ -18,12 +18,12 @@
     </ul>
 </div>
 
-<form action="${pageContext.request.contextPath}/system/staffinfo/add.action" class="form-horizontal">
+<form action="${pageContext.request.contextPath}/system/staffteacher/add.action" class="form-horizontal">
    	<div class="row">
     	<div class="col-sm-3 col-sm-offset-4">
         	<input  type="submit" class="btn btn-success" value="保存"/>
             <input  type="reset" class="btn  btn-danger" value="取消"/>
-            <a href="${pageContext.request.contextPath }/system/staffinfo/teacherlist.action" class="btn btn-waring" >返回上一级</a>
+            <a href="${pageContext.request.contextPath }/system/staffteacher/teacherlist.action" class="btn btn-waring" >返回上一级</a>
         </div>
     </div>
     <h5 class="page-header alert-info" style="padding:10px; margin:0px; margin-bottom:5px;">基本信息</h5>
