@@ -42,15 +42,14 @@ public class StaffSalaryController {
 	
 	@RequestMapping("excel.action")
 	public void export(HttpServletResponse response) throws Exception {
-		//需要导入alibaba的fastjson包
 		StaffSalary staffSalary=new StaffSalary();
 		List<StaffSalary> list =staffSalaryService.getStaffSalary(staffSalary);
 		
 		
 		
 		ExportExcel<StaffSalary> ee= new ExportExcel<StaffSalary>();
-		String[] headers = { "工资单号", "领取人员工号", "财务人员工号", "本月工资" , "扣除工资", "实际发放工资", "是否发放", "发放时间", "备注信息"};
-		String fileName = "员工工资单统计表";
+		String[] headers = { "SalaryId", "StaffId", "StastaffId", "SalaryTotal" , "SalaryDeduct", "SalaryReal", "SalaryIsused", "Time", "Remark"};
+		String fileName = "SalaryTable";
 		ee.exportExcel(headers,list,fileName,response);
 	}
 

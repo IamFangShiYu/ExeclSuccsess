@@ -32,10 +32,10 @@
 		
 <form action="${pageContext.request.contextPath}/payment/studentpayment/add.action" class="form-horizontal">
    	<div class="row">
-    	<div class="col-sm-3 col-sm-offset-4">
+    	<div class="col-sm-4 col-sm-offset-4">
         	<input  type="submit" class="btn btn-success" value="保存"/>
             <input  type="reset" class="btn  btn-danger" value="取消"/>
-            <a href="${pageContext.request.contextPath }/payment/studentpayment/list.action" class="btn btn-success">返回上一级</a>
+            <a href="${pageContext.request.contextPath }/payment/studentpayment/list.action" class="btn btn-success">返回</a>
         </div>
     </div>
     <h5 class="page-header alert-info" style="padding:10px; margin:0px; margin-bottom:5px;">基本信息</h5>

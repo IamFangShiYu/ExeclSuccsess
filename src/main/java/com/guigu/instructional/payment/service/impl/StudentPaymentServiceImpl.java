@@ -78,6 +78,9 @@ public class StudentPaymentServiceImpl implements StudentPaymentService {
 			}
 		
 
+		}else {
+			
+			return studentPaymentMapper.selectByExample(null);
 		}
 
 		return studentPaymentMapper.selectByExample(studentPaymentExample);

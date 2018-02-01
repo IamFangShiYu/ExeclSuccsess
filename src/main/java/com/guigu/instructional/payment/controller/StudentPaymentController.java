@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.naming.Binding;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.guigu.instructional.payment.service.StudentPaymentService;
 import com.guigu.instructional.po.RoleInfo;
 import com.guigu.instructional.po.StaffInfo;
+import com.guigu.instructional.po.StaffSalary;
 import com.guigu.instructional.po.StudentInfo;
 import com.guigu.instructional.po.StudentPayment;
 import com.guigu.instructional.po.StudentPaymentCustom;
@@ -33,6 +35,7 @@ public class StudentPaymentController {
 	@Resource(name="staffInfoServiceImpl")
 	private StaffInfoService staffInfoService;
 	
+	
 	@RequestMapping("loadchange.action")
     public String StudentInfo(Integer studentId,Model model) {
 		StudentInfo studentInfo =studentInfoService.getStudentInfo(studentId);
@@ -42,7 +45,17 @@ public class StudentPaymentController {
         return "system/roleinfo/role_change";
     }
 	
-	
+	@RequestMapping("excel.action")
+	public void export(HttpServletResponse response) throws Exception {
+		StudentPayment studentPayment=new StudentPayment();
+		List<StudentPayment> list =studentPaymentService.getStudentPayment(studentPayment);			
+		ExportExcel<StudentPayment> ee= new ExportExcel<StudentPayment>();
+		
+		String[] headers = { "payment_id", "student_id", "staff_id", "payment_situtation" , "payment_menthod", "payment_time", "payment_discount_amount", "payment_should_amount", "payment_real_amount", "payment_debt_amount", "payment_remark"};
+		String fileName = "StudentPaymentTable";
+		ee.exportExcel(headers,list,fileName,response);
+	}
+
 	@Resource(name="StudentPaymentServiceImpl")
 	private StudentPaymentService studentPaymentService;
 	

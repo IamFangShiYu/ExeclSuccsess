@@ -44,7 +44,9 @@
  	<a href="${pageContext.request.contextPath }/payment/studentpayment/addload.action" paramId="paymentId" paramProperty="paymentId" > 
     <input type="button"   class="btn btn-success"   value="添加" />
     </a> 
- 
+  <a href="${pageContext.request.contextPath }/payment/studentpayment/excel.action" paramId="staffSalaryId" paramProperty="staffSalaryId" > 
+    <input type="button"   class="btn btn-success"   value="导出" />
+    </a> 
  </form>
 </div>
 

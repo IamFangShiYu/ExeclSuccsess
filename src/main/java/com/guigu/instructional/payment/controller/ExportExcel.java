@@ -20,7 +20,7 @@ public class ExportExcel<T> {
 	public void exportExcel(String[] headers,Collection<T> dataset, String fileName,HttpServletResponse response) {
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet(fileName);
-		sheet.setDefaultColumnWidth((short) 200);
+		sheet.setDefaultColumnWidth((short) 20);
 		XSSFRow row = sheet.createRow(0);
 		for (short i = 0; i < headers.length; i++) {
 			XSSFCell cell = row.createCell(i);
@@ -66,7 +66,7 @@ public class ExportExcel<T> {
 		try {
 			String fileName = name + ".xlsx";
 			response.setContentType("application/x-msdownload");
-			response.setHeader("Content-Disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ));
+			response.setHeader("Content-Disposition", "attachment;filename=" + new String( fileName.getBytes("utf-8"), "ISO8859-1" ));
 			fos = new BufferedOutputStream(response.getOutputStream());
 			workbook.write(fos);
 		} catch (Exception e) {
